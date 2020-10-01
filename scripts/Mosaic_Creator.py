@@ -12,19 +12,23 @@ parser.add_argument('--output', dest='output', required=False)
 args = parser.parse_args()
 
 
-def getImages(images_directory):
-    files = os.listdir(images_directory)
+def getImages(images_directory: str):
     images = []
-    for file in files:
-        filePath = os.path.abspath(os.path.join(images_directory, file))
-        try:
-            fp = open(filePath, "rb")
-            im = Image.open(fp)
-            images.append(im)
-            im.load()
-            fp.close()
-        except:
-            print("Invalid image: %s" % (filePath,))
+
+    if os.path.isdir(images_directory):
+        files = os.listdir(images_directory)
+        for file in files:
+            filePath = os.path.abspath(os.path.join(images_directory, file))
+            try:
+                fp = open(filePath, "rb")
+                im = Image.open(fp)
+                images.append(im)
+                im.load()
+                fp.close()
+            except:
+                print("Invalid image: %s" % (filePath,))
+    else:
+        print("Image directory (" + images_directory + ") not found.")
     return (images)
 
 
