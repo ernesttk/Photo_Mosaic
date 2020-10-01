@@ -40,7 +40,7 @@ def getImages(images_directory: str):
     return (images)
 
 
-def getAverageRGB(image: Image):
+def getAverageRGB(image: Image) -> Tuple[float]:
     im = np.array(image)
     w, h, d = im.shape
     return (tuple(np.average(im.reshape(w * h, d), axis=0)))
