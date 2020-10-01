@@ -23,6 +23,9 @@ def getImages(images_directory: str):
                 continue
 
             filePath = os.path.abspath(os.path.join(images_directory, file))
+            if os.path.isdir(filePath):
+                # ignore directories
+                continue
             try:
                 fp = open(filePath, "rb")
                 im = Image.open(fp)
