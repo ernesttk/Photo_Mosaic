@@ -18,6 +18,10 @@ def getImages(images_directory: str):
     if os.path.isdir(images_directory):
         files = os.listdir(images_directory)
         for file in files:
+            if file.startswith('.'):
+                # ignore hidden files
+                continue
+
             filePath = os.path.abspath(os.path.join(images_directory, file))
             try:
                 fp = open(filePath, "rb")
