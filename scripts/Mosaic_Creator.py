@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 import os, random, argparse
+from typing import Tuple
 from PIL import Image
 import numpy as np
 
@@ -39,13 +40,13 @@ def getImages(images_directory: str):
     return (images)
 
 
-def getAverageRGB(image):
+def getAverageRGB(image: Image):
     im = np.array(image)
     w, h, d = im.shape
     return (tuple(np.average(im.reshape(w * h, d), axis=0)))
 
 
-def splitImage(image, size):
+def splitImage(image: Image, size: Tuple[int, int]) -> [Image]:
     W, H = image.size[0], image.size[1]
     m, n = size
     w, h = int(W / n), int(H / m)
@@ -72,7 +73,7 @@ def getBestMatchIndex(input_avg, avgs):
     return (min_index)
 
 
-def createImageGrid(images, dims):
+def createImageGrid(images: [Image], dims: Tuple[int, int]) -> Image:
     m, n = dims
     width = max([img.size[0] for img in images])
     height = max([img.size[1] for img in images])
@@ -84,8 +85,8 @@ def createImageGrid(images, dims):
     return (grid_img)
 
 
-def createPhotomosaic(target_image, input_images, grid_size,
-                      reuse_images=True):
+def createPhotomosaic(target_image: Image, input_images: [Image], grid_size: Tuple[int, int],
+                      reuse_images: bool=True):
     target_images = splitImage(target_image, grid_size)
 
     output_images = []
@@ -160,8 +161,10 @@ if resize_input:
             int(target_image.size[1] / grid_size[0]))
     print("max tile dims: %s" % (dims,))
     # resize
+    resized_input_images = []
     for img in input_images:
-        img.thumbnail(dims)
+        resized_input_images.append(img.resize(dims).convert("RGBA"))
+    input_images = resized_input_images
 
 # create photomosaic
 mosaic_image = createPhotomosaic(target_image, input_images, grid_size, reuse_images)
