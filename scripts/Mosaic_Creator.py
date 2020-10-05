@@ -132,9 +132,6 @@ if input_images == []:
     print('No input images found in %s. Exiting.' % (args.images,))
     exit()
 
-# shuffle list - to get a more varied output?
-random.shuffle(input_images)
-
 # size of grid
 grid_size = (int(args.grid[0]), int(args.grid[1]))
 
