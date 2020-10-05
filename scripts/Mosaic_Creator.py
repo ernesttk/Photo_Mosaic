@@ -10,7 +10,7 @@ import numpy as np
 parser = argparse.ArgumentParser(description='Creates a photomosaic from input images')
 parser.add_argument('--target', dest='target', required=True, help="Image to create mosaic from")
 parser.add_argument('--images', dest='images', required=True, help="Directory of other images to use as mosaic elements")
-parser.add_argument('--grid', nargs=2, dest='grid', required=True, help="Size of photo mosaic")
+parser.add_argument('--grid', nargs=2, dest='grid', required=True, help="Size of grid of mosaic elements. two integers. Target image is divided by these numbers.")
 parser.add_argument('--output', dest='output', required=False, help="Output image file name. Default is: mosaic.jpeg")
 parser.add_argument('-v', '--version', action='version', version=__VERSION__)
 
