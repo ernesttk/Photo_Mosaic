@@ -1,4 +1,7 @@
 #!/usr/bin/env python
+
+__VERSION__="0.0.1"
+
 import os, random, argparse
 from typing import Tuple
 from PIL import Image
@@ -9,6 +12,7 @@ parser.add_argument('--target', dest='target', required=True, help="Image to cre
 parser.add_argument('--images', dest='images', required=True, help="Directory of other images to use as mosaic elements")
 parser.add_argument('--grid', nargs=2, dest='grid', required=True, help="Size of photo mosaic")
 parser.add_argument('--output', dest='output', required=False, help="Output image file name. Default is: mosaic.jpeg")
+parser.add_argument('-v', '--version', action='version', version=__VERSION__)
 
 args = parser.parse_args()
 
